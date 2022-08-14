@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/custom.css">
+    <script src="js/convert.js"></script>
+    <title>Currency Converter</title>
+</head>
+<body>
+  
+  <nav class="navbar navbar-expand-sm fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="javascript:void(0)">FX-Sync</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+        <img src="images/menu.png" alt="menu">  
+      </button>
+      <div class="collapse navbar-collapse" id="mynavbar">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link active" id="1" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" onclick="converter()">Converter</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="2" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" onclick="rates()">Rates</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="3" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" onclick="myhistory()">History</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="4" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" onclick="timeframe()">Timeframe</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="5" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" onclick="pricing()">Pricing</a>
+          </li>
+        </ul>
+        <form class="d-flex" action="https://www.google.com/search" method="get" target="_blank">
+          <input class="form-control me-2" type="text" placeholder="Search in Google" name="q" required="required">
+          <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid converter">
+    <div class=" logodiv"> 
+      <div class="row justify-content-center">
+          <div class="col-12 col-sm-6 col-md-5 col-lg-4 logoimgdiv">
+              <img src="images/logo.png" alt="logo" class="rounded logoimg mx-auto d-block">
+          </div>
+          <div class="col-12 col-sm-6 col-md-5 col-lg-6 logotxtdiv">
+              <h3 class="logotxt">Check live foreign currency exchange rates</h3>
+          </div>
+      </div>
+    </div>
+    <div class="container-fluid text-center spin">
+      <div class="spinner-grow" role="status">
+      </div>
+      <div class="spinner-grow" role="status">
+      </div>
+      <div class="spinner-grow" role="status">
+      </div>
+      <div class="spinner-grow" role="status">
+      </div>
+      <div class="spinner-grow" role="status">
+      </div>
+    </div>
+    <div class="container-fluid cvtindiv">
+        
+      <div class="row justify-content-center">
+        <div class="col-12 col-sm-4 col-md-3 col-lg-3">Amount:</div>
+        <div class="col-12 col-sm-7 col-md-6 col-lg-5"><input type="number" class="form-control ipsize" id="amount" value="1" placeholder="1"></div>
+      </div>
+      <br>
+      <div class="row justify-content-center">
+        <div class="col-2 col-sm-2 col-md-1 col-lg-1">From:</div>
+        <div class="col-10 col-sm-2 col-md-2 col-lg-2"><span id="flag"></span></div>
+        <div class="col-12 col-sm-7 col-md-6 col-lg-5"><select class="form-select form-select-sm form-control ipsize" id="from"></select></div>
+      </div>
+      <br>
+      <div class="row justify-content-center">
+        <div class="col-2 col-sm-2 col-md-1 col-lg-1">To:</div>
+        <div class="col-10 col-sm-2 col-md-2 col-lg-2"><span id="flag2"></span></div>
+        <div class="col-12 col-sm-7 col-md-6 col-lg-5"><select class="form-select form-select-sm form-control ipsize" id="to"></select></div>
+      </div>
+      <br>
+      <div class="row justify-content-center">
+        <div class="col-5 col-sm-3 col-lg-2"><button onclick="Convert()" class="btn btn-primary">Convert</button></div>
+      </div>
+        
+    </div>
+    <br>
+    <div class="container-fluid cvtout text-center">
+      <span id="output"></span><br>
+      <span class="update_time"></span>
+    </div>
+  </div>
+
+  <div class="container-fluid popular less_currency text-center">
+    <h2>Popular Exchange Rates in Myanmar</h2>
+    <span class="update_time"></span><br>
+    <button type="button" class="btn btn-info see_less" onclick="seeAll()">See All</button>
+    <table class="table table-borderless " id="curlist">
+      <thead>
+        <tr>
+          <td colspan="3" class="tbh"> Currency Lists</td>
+          <td class="tbh">Exchange Rate in (MMK)</td>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container-fluid popular all_currency text-center">
+    <h2>Global Exchange Rates in Myanmar</h2>
+    <span class="update_time"></span><br>
+    <button type="button" class="btn btn-info see_all" onclick="seeLess()">See Less</button>
+    <table class="table table-borderless " id="curlistall">
+      <thead>
+        <tr>
+          <td colspan="3" class="tbh"> Currency Lists</td>
+          <td class="tbh">Exchange Rate in (MMK)</td>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container-fluid myhistory text-center">
+    <h2 class="notallow">Your subscription plan does not allow you to use this endpoint</h2>
+  </div>
+  <div class="container-fluid timeframe text-center">
+    <h2 class="notallow">Your subscription plan does not allow you to use this endpoint</h2>
+  </div>
+    
+  <div class="container-fluid pricing p-5 text-center">
+    <h2>Now, select your plan</h2>
+    <h6>If you have any other questions, feel free to drop us an email</h6>
+    <br>
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+        <div class="card h-100 shadow-lg">
+          <div class="card-body">
+            <div class="text-center p-3">
+              <h5 class="card-title">Free</h5>
+              <br>
+              <span class="h2">$0</span>/month 
+              <br><br>
+              <h6>Features:</h6>
+            </div>
+            <p class="card-text"> - Updated every 60 minutes <br>
+              - 1,250 monthly requests <br>
+              - Change base currency <br>
+              <br><br><br>
+            </p>
+            <br>
+            <h6 class="text-center">Endpoints:</h6>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check" viewBox="0 0 16 16">
+              <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+            </svg> Rates</li>
+            <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-x" viewBox="0 0 16 16">
+              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+            </svg> Convert</li>
+            <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-x" viewBox="0 0 16 16">
+              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+            </svg> History</li>
+            <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-x" viewBox="0 0 16 16">
+              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+            </svg> Timeframe</li>
+          </ul>
+          <div class="card-body text-center">
+            <button class="btn btn-outline-primary btn-lg" style="border-radius:30px">Get this</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+        <div class="card h-100 shadow-lg">
+          <div class="card-body">
+            <div class="text-center p-3">
+              <h5 class="card-title">Essential</h5>
+              <br>
+              <span class="h2">$9.99</span>/month 
+              <br><br>
+              <h6>Features:</h6>
+            </div>
+            <p class="card-text"> - Updated every 60 minutes <br>
+              - 12,500 monthly requests <br>
+              - Change base currency <br>
+              - Secured using HTTPS <br>
+              - Top notch support <br>
+              - Commercial use <br>
+            </p>
+            <br>
+            <h6 class="text-center">Endpoints:</h6>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check" viewBox="0 0 16 16">
+              <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+            </svg> Rates</li>
+            <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check" viewBox="0 0 16 16">
+              <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+            </svg> Convert</li>
+            <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-x" viewBox="0 0 16 16">
+              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+            </svg> History</li>
+            <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-x" viewBox="0 0 16 16">
+              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+            </svg> Timeframe</li>
+          </ul>
+          <div class="card-body text-center">
+            <button class="btn btn-outline-primary btn-lg" style="border-radius:30px">Get this</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+        <div class="card h-100 shadow-lg">
+          <div class="card-body">
+            <div class="text-center p-3">
+              <h5 class="card-title">StartUp</h5>
+              <br>
+              <span class="h2">$34.99</span>/month 
+              <br><br>
+              <h6>Features:</h6>
+            </div>
+            <p class="card-text"> - Updated every 10 minutes <br>
+              - 125,000 monthly requests <br>
+              - Change base currency <br>
+              - Secured using HTTPS <br>
+              - Top notch support <br>
+              - Commercial use <br>
+            </p>
+            <br>
+            <h6 class="text-center">Endpoints:</h6>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check" viewBox="0 0 16 16">
+              <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+            </svg> Rates</li>
+            <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check" viewBox="0 0 16 16">
+              <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+            </svg> Convert</li>
+            <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check" viewBox="0 0 16 16">
+              <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+            </svg> History</li>
+            <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-x" viewBox="0 0 16 16">
+              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+            </svg> Timeframe</li>
+          </ul>
+          <div class="card-body text-center">
+            <button class="btn btn-outline-primary btn-lg" style="border-radius:30px">Get this</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+        <div class="card h-100 shadow-lg">
+          <div class="card-body">
+            <div class="text-center p-3">
+              <h5 class="card-title">Professional</h5>
+              <br>
+              <span class="h2">$74.99</span>/month 
+              <br><br>
+              <h6>Features:</h6>
+            </div>
+            <p class="card-text"> - Updated every 60 seconds! <br>
+              - Unlimited monthly requests <br>
+              - Change base currency <br>
+              - Secured using HTTPS <br>
+              - Top notch support <br>
+              - Commercial use <br>
+            </p>
+            <br>
+            <h6 class="text-center">Endpoints:</h6>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check" viewBox="0 0 16 16">
+              <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+            </svg> Rates</li>
+            <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check" viewBox="0 0 16 16">
+              <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+            </svg> Convert</li>
+            <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check" viewBox="0 0 16 16">
+              <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+            </svg> History</li>
+            <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check" viewBox="0 0 16 16">
+              <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+            </svg> Timeframe</li>
+          </ul>
+          <div class="card-body text-center">
+            <button class="btn btn-outline-primary btn-lg" style="border-radius:30px">Get this</button>
+          </div>
+        </div>
+      </div>
+      
+    </div>    
+
+  
+      
+    
+</body>
+</html>

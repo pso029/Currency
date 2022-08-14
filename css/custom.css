@@ -1,0 +1,159 @@
+body {
+  background-color: #312e2f;
+}
+
+body .btn {
+  background-color: #d4b068;
+  color: #312e2f;
+}
+
+.navbar {
+  background-color: #312e2f;
+}
+
+.navbar .navbar-brand, .navbar .nav-link, .navbar .form-control {
+  color: #d4b068;
+}
+
+.navbar .active {
+  background-color: #d4b068;
+  color: #312e2f;
+  border-radius: 15px;
+}
+
+.navbar .form-control {
+  background-color: #312e2f;
+}
+
+.logodiv {
+  text-align: center;
+}
+
+.logodiv .logoimg {
+  width: 10em;
+  height: 10em;
+}
+
+.logodiv .logotxt {
+  color: #d4b068;
+}
+
+.spin .spinner-grow {
+  color: #d4b068;
+}
+
+.cvtindiv {
+  display: none;
+  color: #d4b068;
+}
+
+.cvtindiv .ipsize {
+  padding: 7px 15px;
+  color: #d4b068;
+  background-color: #312e2f;
+}
+
+#output {
+  color: #d4b068;
+  font-size: 1.3em;
+}
+
+.update_time {
+  font-size: 0.8em;
+  color: #d4b068;
+}
+
+.popular .see_all, .popular .see_less {
+  float: left;
+  font-size: 0.6em;
+  width: 7em;
+}
+
+.popular td, .popular h2 {
+  color: #d4b068;
+}
+
+.popular td .tbh, .popular h2 .tbh {
+  font-size: 1.1em;
+  font-weight: bold;
+  border-bottom: 3px solid #d4b068 !important;
+}
+
+.myhistory, .timeframe {
+  position: absolute;
+  top: 45%;
+}
+
+.myhistory .notallow, .timeframe .notallow {
+  font-size: 1.2em;
+  color: #d4b068;
+}
+
+.pricing h2, .pricing h6 {
+  color: #d4b068;
+}
+
+.pricing .card {
+  border: none;
+  padding: 10px 20px;
+  background-color: #312e2f;
+  color: #d4b068;
+}
+
+.pricing .card .list-group-item {
+  background-color: #312e2f;
+  color: #d4b068;
+}
+
+.pricing .card:hover {
+  transform: scale(1.02, 1.02);
+  -webkit-transform: scale(1.02, 1.02);
+  -webkit-box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.75) !important;
+          box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.75) !important;
+}
+
+.pricing .card:hover .btn-outline-primary {
+  color: #d4b068;
+  background: #312e2f;
+  border: 2px solid #d4b068;
+}
+
+@media only screen and (min-width: 575px) {
+  .logodiv .logoimgdiv {
+    padding-right: 0;
+  }
+  .logodiv .logoimg {
+    width: 12em;
+    height: 12em;
+    margin-right: 0 !important;
+  }
+  .logodiv .logotxtdiv {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .tbh {
+    font-size: 1.3em;
+  }
+}
+
+@media only screen and (min-width: 767px) {
+  .logodiv .logoimg {
+    width: 15em;
+    height: 15em;
+  }
+  .tbh {
+    font-size: 1.5em;
+  }
+  .popular .see_all, .popular .see_less {
+    font-size: 1em;
+    width: 7em;
+  }
+}
+/*# sourceMappingURL=custom.css.map */
